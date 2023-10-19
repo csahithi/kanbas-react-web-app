@@ -1,0 +1,66 @@
+.wd-kanbas-navigation {
+    background-color: black;
+    list-style: none;
+    padding: 0px;
+    width: 85px;
+    margin: 0px;
+  }
+  
+  .wd-kanbas-navigation li {
+    padding: 8px;
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  .wd-kanbas-navigation li.wd-active {
+    background-color: white;
+    color: #d41b2c;
+  }
+
+  /* .wd-kanbas-navigation li.wd-active a {
+    color: #d41b2c;
+  } */
+  
+  .wd-kanbas-navigation a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .wd-kanbas-navigation a:hover {
+    color: white;
+    text-decoration: none;
+  }
+  
+  /* .wd-kanbas-navigation a i {
+    color: #d41b2c;
+    font-size: 1.5em;
+    margin-bottom: 5px;
+  } */
+
+  .wd-kanbas-nav-icon {
+    color: #d41b2c;
+    font-size: 1.5em;
+    margin-bottom: 5px;
+  }
+
+  .wd-kanbas-navigation a .wd-kanbas-nav-account-icon {
+    color: white;
+    font-size: 1.5em;
+    margin-bottom: 5px;
+  }
+
+  .wd-kanbas-navigation li.wd-active .wd-kanbas-nav-account-icon {
+    color: #d41b2c;
+    font-size: 1.5em;
+    margin-bottom: 5px;
+  }
+
+  .wd-minimized-kanbas-navigation li {
+    padding: 10px;
+    margin-bottom: 3px;
+  }
+
+  .wd-minimized-kanbas-navigation li a{
+    text-decoration: none;
+    color: #d41b2c;
+  }
