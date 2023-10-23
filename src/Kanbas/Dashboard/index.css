@@ -1,0 +1,58 @@
+.wd-large-text {
+    font-size: 1.5rem;
+}
+
+.wd-dashboard-title {
+    font-weight: lighter;
+}
+
+.wd-dashboard-div {
+    width: 100%;
+    margin: 10px 10px 0 100px;
+    padding-right: 150px;
+    /* position: fixed;
+    top: 10px;
+    bottom: 0;
+    left: 100px; */ /* Adjust this value to account for the Canvas Navigation Sidebar */
+    /*right: 10px; */
+    text-align: left; 
+}
+
+.wd-published-course-title {
+    font-weight: normal;
+}
+
+.wd-dashboard-courses {
+    margin-left: 10px;
+}
+
+.wd-dashboard-card {
+    width: 260px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.3);
+    margin: 0 30px 30px 0;
+}
+
+.wd-card-title {
+    color: #315e8e;
+    font-size: 0.875rem;
+}
+
+.wd-card-subtitle {
+    font-size: 1rem;
+    font-weight: normal;
+    margin-top: 4px;
+    color: #677179;
+}
+
+.wd-card-text {
+    font-size: 12px;
+    margin-bottom: 10px;
+    color: #677179;
+}
+
+.wd-dashboard-course-card {
+    margin: 0 30px 30px 0;
+    width: 260px; /* Automatically adjust width */
+    height: auto; /* Automatically adjust height */
+    display: inline-block; 
+}

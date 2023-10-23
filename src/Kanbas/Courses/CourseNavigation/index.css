@@ -1,0 +1,43 @@
+.wd-course-navigation {
+    background-color: white;
+    list-style: none;
+    padding: 0px;
+    width: 190px;
+    margin: 0px;
+    margin-left: 20px;
+  }
+  .wd-course-navigation li {
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .wd-course-navigation li.wd-active {
+    border-left: 2px solid black;
+  }
+  .wd-course-navigation li.wd-active span {
+    color: black;
+  }
+  
+  .wd-course-navigation a {
+    color: #d41b2c;
+    text-decoration: none;
+  }
+
+  .wd-course-navigation a:hover {
+    color: #d41b2c;
+    text-decoration: none;
+  }
+
+  .wd-minimized-course-navigation li {
+    padding: 10px;
+    margin-bottom: 3px;
+  }
+
+  .wd-minimized-course-navigation li span{
+    color: #d41b2c;
+    margin-right: 7px;
+  }
+
+  .wd-minimized-course-navigation a{
+    text-decoration: none;
+  }

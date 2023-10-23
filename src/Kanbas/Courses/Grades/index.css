@@ -1,0 +1,23 @@
+.table-striped>tbody>tr>td.wd-color-link-red {
+    color: #b52828;
+}
+
+.grade-table-title {
+    text-align: center;
+    font-weight: normal;
+}
+
+.grade-table-subtitle {
+    text-align: center;
+    font-weight: normal;
+    font-size: 0.9rem;     
+}
+
+.grade-text-box {
+    border-color: #d41b2c;
+    border-radius: 2px;
+}
+
+.table-bordered>:not(caption)>* {
+    border-width: 1px 1px;
+}
