@@ -276,7 +276,7 @@ body * {
 }
 
 .btn-success.wd-btn-kanbas-success:hover {
-    background-color: #b52828;
+    background-color: rgb(2, 116, 2);
     border-color: #c7cdd1;
     color: white;
     float: right;

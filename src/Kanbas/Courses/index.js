@@ -1,4 +1,4 @@
-import db from "../../Kanbas/Database";
+// import db from "../../Kanbas/Database";
 import { Link, Navigate, Route, Routes, useLocation, useParams } from "react-router-dom";
 import CourseNavigation from "./CourseNavigation";
 import { FaBars, FaChevronDown, FaGlasses } from "react-icons/fa";
@@ -11,7 +11,7 @@ import Grades from "./Grades";
 import { FaXmark } from "react-icons/fa6";
 import { useState } from "react";
 
-function Courses() {
+function Courses({ courses }) {
     let courseIdToUse;
     const { courseId } = useParams();
     const {pathname} = useLocation();  
@@ -22,7 +22,7 @@ function Courses() {
         courseIdToUse = "RS101";
     }
     // const courseIdToUse = courseId || "RS101";
-    const course = db.courses.find((course) => course._id === courseIdToUse);
+    const course = courses.find((course) => course._id === courseIdToUse);
     const startIndex = pathname.indexOf(courseIdToUse) + courseIdToUse.length;
     const breadcrumbPath = pathname.slice(startIndex);
     const breadcrumbItems = breadcrumbPath.split('/').filter(item => item !== '');  
