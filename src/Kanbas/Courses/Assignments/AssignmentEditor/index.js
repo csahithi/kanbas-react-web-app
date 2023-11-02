@@ -1,18 +1,25 @@
 import React from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import db from "../../../Database";
 import { Link } from "react-router-dom";
 import { FaCheckCircle, FaEllipsisV, FaPlus } from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
+import { addAssignment, deleteAssignment, updateAssignment, selectAssignment } from "../assignmentsReducer";
 
 function AssignmentEditor() {
+    const isNewAssignment = useLocation().pathname.includes("Create");
+    isNewAssignment ? console.log("New Assignment") : console.log("Existing Assignment");
     const { assignmentId } = useParams();
-    const assignment = db.assignments.find(
-    (assignment) => assignment._id === assignmentId);
+    const assignments = useSelector((state) => state.assignmentsReducer.assignments);
+    const assignment = useSelector((state) => state.assignmentsReducer.assignment);
+    const dispatch = useDispatch();
+    // const assignment = assignments.find(
+    // (assignment) => assignment._id === assignmentId);
     const { courseId } = useParams();
     const navigate = useNavigate();
     const handleSave = () => {
-    console.log("Actually saving assignment TBD in later assignments");
-    navigate(`/Kanbas/Courses/${courseId}/Assignments`);
+        isNewAssignment ? dispatch(addAssignment({assignment, courseId})) : dispatch(updateAssignment(assignment))
+        navigate(`/Kanbas/Courses/${courseId}/Assignments`);
     };
     return (
         <div className="wd-flex-grow-1">
@@ -29,12 +36,17 @@ function AssignmentEditor() {
 
             <div className="modules-list">
                 <label for="assignment-name" className="form-label">Assignment Name</label>
-                <input type="text" className="form-control mb-4" id="assignment-name" value={assignment.title}/>  
-                <textarea className="form-control mb-4" rows="4">This is the assignment description.</textarea>
+                <input type="text" className="form-control mb-4" id="assignment-name" value={assignment.title} 
+                onChange={(e) => dispatch(selectAssignment({...assignment, title: e.target.value }))}/>  
+                <textarea className="form-control mb-4" rows="4"
+                onChange={(e) => dispatch(selectAssignment({...assignment, description: e.target.value }))}>
+                    {assignment.description}
+                </textarea>
                 <div className="row mb-4">
                     <label for="assignment-points" className="col-sm-3 col-form-label"><div className="float-end">Points</div></label>
                     <div className="col-sm-5">
-                    <input id="assignment-points" className="form-control" type="text" value="100"/>
+                    <input id="assignment-points" className="form-control" type="text" value={assignment.points}
+                    onChange={(e) => dispatch(selectAssignment({...assignment, points: e.target.value }))}/>
                     </div>
                 </div>
                 <div className="row mb-4">
@@ -106,16 +118,19 @@ function AssignmentEditor() {
                             <label className="form-label wd-font-weight-bold" for="assignment-due">
                                 Due
                             </label>
-                            <input id="assignment-due" className="form-control mb-3" type="date" value="2023-09-18"/>
+                            <input id="assignment-due" className="form-control mb-3" type="date" value={assignment.due}
+                            onChange={(e) => dispatch(selectAssignment({...assignment, due: e.target.value }))}/>
 
                             <div className="wd-flex-row-container">
                                 <div className="col-sm-6 me-2">
                                     <label className="form-label wd-font-weight-bold" for="assignment-available-from">Available from</label>
-                                    <input id="assignment-available-from" className="form-control" type="date" value="2023-09-06"/>
+                                    <input id="assignment-available-from" className="form-control" type="date" value={assignment.availableFromDate}
+                                    onChange={(e) => dispatch(selectAssignment({...assignment, availableFromDate: e.target.value }))}/>
                                 </div>
                                 <div className="col-sm-6">
                                     <label className="form-label wd-font-weight-bold" for="assignment-until">Until</label>
-                                    <input id="assignment-until" className="form-control" type="date"/>
+                                    <input id="assignment-until" className="form-control" type="date" value={assignment.availableUntilDate}
+                                    onChange={(e) => dispatch(selectAssignment({...assignment, availableUntilDate: e.target.value }))}/>
                                 </div>
                             </div>
                         </div>

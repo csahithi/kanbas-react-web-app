@@ -52,6 +52,7 @@ function Kanbas() {
                                               addNewCourse={addNewCourse}
                                               deleteCourse={deleteCourse}
                                               updateCourse={updateCourse} />} />
+            <Route path="Courses" element={<Navigate to="RS101/Home" />}/>
             <Route path="Courses/:courseId/*" element={<Courses courses={courses} />} />
             <Route path="KanbasMin/:courseId" element={<KanbasMin />} />  
             <Route path="CourseNavMin/:courseId" element={<CourseNavMin />} />
