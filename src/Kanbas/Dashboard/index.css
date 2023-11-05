@@ -56,3 +56,39 @@
     height: auto; /* Automatically adjust height */
     display: inline-block; 
 }
+
+.btn-primary.wd-btn-dashboard-primary {
+    background-color: #f5f5f5;
+    border-color: #c7cdd1;
+    color: black;
+    border-radius: 3px;
+    white-space: nowrap;
+    margin-right: 5px;
+}
+
+.btn-primary.wd-btn-dashboard-primary:hover {
+    background-color: #e8e8e8;
+    border-color: #c7cdd1;
+    color: black;
+    border-radius: 3px;
+    white-space: nowrap;
+    margin-right: 5px;
+}
+
+.btn-danger.wd-btn-dashboard-danger {
+    background-color: #d41b2c;
+    border-color: #c7cdd1;
+    color: white;
+    border-radius: 3px;
+    white-space: nowrap;
+    margin-right: 5px;
+}
+
+.btn-danger.wd-btn-dashboard-danger:hover {
+    background-color: #b52828;
+    border-color: #c7cdd1;
+    color: white;
+    border-radius: 3px;
+    white-space: nowrap;
+    margin-right: 5px;
+}
