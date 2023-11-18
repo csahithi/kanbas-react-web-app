@@ -1,17 +1,25 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import db from "../../Database";
 import { FaCaretDown, FaCheckCircle, FaGripVertical, FaPlus } from "react-icons/fa";
 import { FaEllipsisVertical, FaPenToSquare } from "react-icons/fa6";
 import "./index.css";
 import { useSelector, useDispatch } from "react-redux";
-import { addAssignment, deleteAssignment, updateAssignment, selectAssignment, resetAssignment } from "./assignmentsReducer";
+import { 
+    addAssignment, 
+    deleteAssignment, 
+    updateAssignment, 
+    setAssignment, 
+    resetAssignment,
+    setAssignments
+ } from "./assignmentsReducer";
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import * as client from "./client";
 
 function Assignments() {
     const { courseId } = useParams();
@@ -26,8 +34,16 @@ function Assignments() {
       setOpen(false);
     }; 
     const [clickId, setClickId] = useState(0);
-    // const courseAssignments = assignments.filter(
-    // (assignment) => assignment.course === courseId);
+    useEffect(() => {
+        client.findAssignmentsForModule(courseId).then((assignments) => {
+            dispatch(setAssignments(assignments))
+        });
+    }, [courseId]);
+    const handleDeleteAssignment = (assignmentId) => {
+        client.deleteAssignment(assignmentId).then((status) => {
+            dispatch(deleteAssignment(assignmentId));
+        });
+    };
     return (
         <div className="wd-flex-grow-1">
             <br/>
@@ -68,7 +84,7 @@ function Assignments() {
                                 <Link
                                 key={assignment._id}
                                 to={`/Kanbas/Courses/${courseId}/Assignments/${assignment._id}`}
-                                onClick={() => { dispatch(selectAssignment(assignment)) }}>
+                                onClick={() => { dispatch(setAssignment(assignment)) }}>
                                     <div className="wd-assignment-title">{assignment.title}</div>
                                     <div className="wd-assignment-subtitle">{assignment.course}</div>
                                     <div className="wd-assignment-subtitle wd-flex-row-container">
@@ -101,7 +117,7 @@ function Assignments() {
                                     <Button onClick={handleClose}><span className="wd-color-text-red wd-font-weight-bold">No</span></Button>
                                     <Button onClick={() => {
                                         handleClose()
-                                        dispatch(deleteAssignment(clickId))}} autoFocus>
+                                        handleDeleteAssignment(clickId)}} autoFocus>
                                         <span className="wd-color-text-red wd-font-weight-bold">Yes</span>
                                     </Button>
                                     </DialogActions>

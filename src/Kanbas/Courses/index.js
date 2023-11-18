@@ -9,11 +9,25 @@ import Assignments from "./Assignments";
 import AssignmentEditor from "./Assignments/AssignmentEditor";
 import Grades from "./Grades";
 import { FaXmark } from "react-icons/fa6";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-function Courses({ courses }) {
+function Courses() {
     let courseIdToUse;
+    // const URL = "http://localhost:4000/api/courses";
+    const API_BASE = process.env.REACT_APP_API_BASE;
+    const URL = `${API_BASE}/courses`;
     const { courseId } = useParams();
+    const [course, setCourse] = useState({});
+    const findCourseById = async (courseId) => {
+        const response = await axios.get(
+            `${URL}/${courseId}`
+        );
+        setCourse(response.data);
+    };
+    useEffect(() => {
+        findCourseById(courseId);
+    }, [courseId]);
     const {pathname} = useLocation();  
     if (courseId){
         courseIdToUse = courseId;
@@ -22,7 +36,6 @@ function Courses({ courses }) {
         courseIdToUse = "RS101";
     }
     // const courseIdToUse = courseId || "RS101";
-    const course = courses.find((course) => course._id === courseIdToUse);
     const startIndex = pathname.indexOf(courseIdToUse) + courseIdToUse.length;
     const breadcrumbPath = pathname.slice(startIndex);
     const breadcrumbItems = breadcrumbPath.split('/').filter(item => item !== '');  

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { FaCaretDown, FaCheckCircle, FaEllipsisV, FaGripVertical, FaPlus } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
@@ -7,9 +7,30 @@ import {
     deleteModule,
     updateModule,
     setModule,
+    setModules,
 } from "./modulesReducer";
+import * as client from "./client";
 function ModuleList() {
     const { courseId } = useParams();
+    useEffect(() => {
+        client.findModulesForCourse(courseId).then((modules) =>
+            dispatch(setModules(modules))
+        );
+    }, [courseId]);
+    const handleAddModule = () => {
+        client.createModule(courseId, module).then((module) => {
+            dispatch(addModule(module));
+        });
+    };
+    const handleDeleteModule = (moduleId) => {
+        client.deleteModule(moduleId).then((status) => {
+            dispatch(deleteModule(moduleId));
+        });
+    };
+    const handleUpdateModule = async () => {
+        const status = await client.updateModule(module);
+        dispatch(updateModule(module));
+    };
     const modules = useSelector((state) => state.modulesReducer.modules);
     const module = useSelector((state) => state.modulesReducer.module);
     const dispatch = useDispatch();
@@ -44,8 +65,8 @@ function ModuleList() {
                         onChange={(e) => dispatch(setModule({
                         ...module, name: e.target.value }))} />
                     </div>
-                    <button className="btn btn-success wd-btn-kanbas-success" style={{height:"fit-content"}} onClick={() => { dispatch(addModule({ ...module, course: courseId })) }}>Add</button>
-                    <button className="btn btn-danger wd-btn-kanbas-danger" style={{height:"fit-content"}} onClick={() => { dispatch(updateModule(module)) }}>Update</button>
+                    <button className="btn btn-success wd-btn-kanbas-success" style={{height:"fit-content"}} onClick={handleAddModule}>Add</button>
+                    <button className="btn btn-danger wd-btn-kanbas-danger" style={{height:"fit-content"}} onClick={handleUpdateModule}>Update</button>
                 </div>
                 <div className="col-sm-3">
                     <textarea className="form-control me-2" value={module.description}
@@ -60,21 +81,21 @@ function ModuleList() {
                         <div>
                     <li className="list-group-item list-group-item-secondary" style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
                     <div className="flex">
-                                <FaGripVertical className="me-2"/>
-                                <FaCaretDown className="me-3"/>
-                                {module.name}                             
-                            </div>
-                            <div style={{display: "flex", alignItems: "center"}}>
-                            <button className="btn btn-success wd-btn-kanbas-success" onClick={() => dispatch(setModule(module)) }>Edit</button>
-                                <button className="btn btn-danger wd-btn-kanbas-danger" onClick={() => dispatch(deleteModule(module._id))}>Delete</button>
-                                <FaCheckCircle className="ms-2 me-1 wd-color-green"/>
-                                <FaCaretDown className="me-3"/>
-                                <FaPlus className="me-3"/>
-                                <FaEllipsisV/>
-                            </div>
+                        <FaGripVertical className="me-2"/>
+                        <FaCaretDown className="me-3"/>
+                        {module.name}                             
+                    </div>
+                    <div style={{display: "flex", alignItems: "center"}}>
+                        <button className="btn btn-success wd-btn-kanbas-success" onClick={() => dispatch(setModule(module)) }>Edit</button>
+                        <button className="btn btn-danger wd-btn-kanbas-danger" onClick={() => handleDeleteModule(module._id)}>Delete</button>
+                        <FaCheckCircle className="ms-2 me-1 wd-color-green"/>
+                        <FaCaretDown className="me-3"/>
+                        <FaPlus className="me-3"/>
+                        <FaEllipsisV/>
+                    </div>
                     </li>
                     <li className="list-group-item wd-home-list-item">
-                            <i class="fas fa-grip-vertical me-3"></i>
+                            <i className="fas fa-grip-vertical me-3"></i>
                             <div className="wd-flex-grow-1">
                                 {module.description}
                             </div>
