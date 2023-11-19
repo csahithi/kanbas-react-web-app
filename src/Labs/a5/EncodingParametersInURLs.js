@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 function EncodingParametersInURLs() {
+    const LAB_BASE = process.env.REACT_APP_LAB_BASE;
     const [a, setA] = useState(34);
     const [b, setB] = useState(23);
     const [welcome, setWelcome] = useState("");
     const fetchWelcome = async () => {
-    const response = await axios.get("http://localhost:4000/a5/welcome");
+    const response = await axios.get(`${LAB_BASE}/welcome`);
         setWelcome(response.data);
     };
     const [result, setResult] = useState(0);
     const fetchSum = async (a, b) => {
     const response = await
-    axios.get(`http://localhost:4000/a5/add/${a}/${b}`);
+    axios.get(`${LAB_BASE}/add/${a}/${b}`);
     setResult(response.data);
     };
     const fetchSubtraction = async (a, b) => {
     const response = await axios.get(
-    `http://localhost:4000/a5/subtract/${a}/${b}`);
+    `${LAB_BASE}/subtract/${a}/${b}`);
     setResult(response.data);
     };
     useEffect(() => {
@@ -48,23 +49,23 @@ function EncodingParametersInURLs() {
             </button>
             <h3>Path Parameters</h3>
             <a
-                href={`http://localhost:4000/a5/add/${a}/${b}`}
+                href={`${LAB_BASE}/add/${a}/${b}`}
                 className="btn btn-primary">
                 Add {a} + {b}
             </a>
             <a
-                href={`http://localhost:4000/a5/subtract/${a}/${b}`}
+                href={`${LAB_BASE}/subtract/${a}/${b}`}
                 className="btn btn-danger">
                 Subtract {a} - {b}
             </a>
             <h3>Query Parameters</h3>
             <a
-                href={`http://localhost:4000/a5/calculator?operation=add&a=${a}&b=${b}`}
+                href={`${LAB_BASE}/calculator?operation=add&a=${a}&b=${b}`}
                 className="btn btn-primary">
                 Add {a} + {b}
             </a>
             <a
-                href={`http://localhost:4000/a5/calculator?operation=subtract&a=${a}&b=${b}`}
+                href={`${LAB_BASE}/calculator?operation=subtract&a=${a}&b=${b}`}
                 className="btn btn-danger">
                 Subtract {a} - {b}
             </a>

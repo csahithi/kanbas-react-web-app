@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 function WorkingWithObjects() {
+    const LAB_BASE = process.env.REACT_APP_LAB_BASE;
     const [assignment, setAssignment] = useState({
         id: 1,
         title: "NodeJS Assignment",
@@ -9,7 +10,7 @@ function WorkingWithObjects() {
         completed: false,
         score: 0,
         });
-    const URL = "http://localhost:4000/a5/assignment";
+    const URL = `${LAB_BASE}/assignment`;
     const fetchAssignment = async () => {
         const response = await axios.get(`${URL}`);
         setAssignment(response.data);
@@ -70,13 +71,13 @@ function WorkingWithObjects() {
                     Completed
             </label>
             <h4>Retrieving Objects</h4>
-            <a href="http://localhost:4000/a5/assignment"
+            <a href={`${LAB_BASE}/assignment`}
                 className="btn btn-primary me-2">
                 Get Assignment
             </a>
             <h4>Retrieving Properties</h4>
             <a
-                href="http://localhost:4000/a5/assignment/title"
+                href={`${LAB_BASE}/assignment/title`}
                 className="btn btn-primary me-2">
                 Get Title
             </a>

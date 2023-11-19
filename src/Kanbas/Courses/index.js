@@ -11,7 +11,7 @@ import Grades from "./Grades";
 import { FaXmark } from "react-icons/fa6";
 import { useState, useEffect } from "react";
 import axios from "axios";
- 
+
 function Courses() {
     let courseIdToUse;
     // const URL = "http://localhost:4000/api/courses";
