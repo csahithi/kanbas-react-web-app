@@ -4,7 +4,8 @@ import db from "../../../Database";
 import { Link } from "react-router-dom";
 import { FaCheckCircle, FaEllipsisV, FaPlus } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import { addAssignment, deleteAssignment, updateAssignment, selectAssignment } from "../assignmentsReducer";
+import { addAssignment, deleteAssignment, updateAssignment, setAssignment } from "../assignmentsReducer";
+import * as client from "../client";
 
 function AssignmentEditor() {
     const isNewAssignment = useLocation().pathname.includes("Create");
@@ -13,12 +14,19 @@ function AssignmentEditor() {
     const assignments = useSelector((state) => state.assignmentsReducer.assignments);
     const assignment = useSelector((state) => state.assignmentsReducer.assignment);
     const dispatch = useDispatch();
-    // const assignment = assignments.find(
-    // (assignment) => assignment._id === assignmentId);
     const { courseId } = useParams();
     const navigate = useNavigate();
+    const handleAddAssignment = (courseId, assignment) => {  
+        client.createAssignment(courseId, assignment).then((assignment) => {
+            dispatch(addAssignment(assignment));
+        });
+    };
+    const handleUpdateAssignment = async (assignment) => {
+        const status = await client.updateAssignment(assignment);
+        dispatch(updateAssignment(assignment));
+    };
     const handleSave = () => {
-        isNewAssignment ? dispatch(addAssignment({assignment, courseId})) : dispatch(updateAssignment(assignment))
+        isNewAssignment ? handleAddAssignment(courseId, assignment) : handleUpdateAssignment(assignment);
         navigate(`/Kanbas/Courses/${courseId}/Assignments`);
     };
     return (
@@ -37,16 +45,16 @@ function AssignmentEditor() {
             <div className="modules-list">
                 <label for="assignment-name" className="form-label">Assignment Name</label>
                 <input type="text" className="form-control mb-4" id="assignment-name" value={assignment.title} 
-                onChange={(e) => dispatch(selectAssignment({...assignment, title: e.target.value }))}/>  
+                onChange={(e) => dispatch(setAssignment({...assignment, title: e.target.value }))}/>  
                 <textarea className="form-control mb-4" rows="4"
-                onChange={(e) => dispatch(selectAssignment({...assignment, description: e.target.value }))}>
+                onChange={(e) => dispatch(setAssignment({...assignment, description: e.target.value }))}>
                     {assignment.description}
                 </textarea>
                 <div className="row mb-4">
                     <label for="assignment-points" className="col-sm-3 col-form-label"><div className="float-end">Points</div></label>
                     <div className="col-sm-5">
                     <input id="assignment-points" className="form-control" type="text" value={assignment.points}
-                    onChange={(e) => dispatch(selectAssignment({...assignment, points: e.target.value }))}/>
+                    onChange={(e) => dispatch(setAssignment({...assignment, points: e.target.value }))}/>
                     </div>
                 </div>
                 <div className="row mb-4">
@@ -119,18 +127,18 @@ function AssignmentEditor() {
                                 Due
                             </label>
                             <input id="assignment-due" className="form-control mb-3" type="date" value={assignment.due}
-                            onChange={(e) => dispatch(selectAssignment({...assignment, due: e.target.value }))}/>
+                            onChange={(e) => dispatch(setAssignment({...assignment, due: e.target.value }))}/>
 
                             <div className="wd-flex-row-container">
                                 <div className="col-sm-6 me-2">
                                     <label className="form-label wd-font-weight-bold" for="assignment-available-from">Available from</label>
                                     <input id="assignment-available-from" className="form-control" type="date" value={assignment.availableFromDate}
-                                    onChange={(e) => dispatch(selectAssignment({...assignment, availableFromDate: e.target.value }))}/>
+                                    onChange={(e) => dispatch(setAssignment({...assignment, availableFromDate: e.target.value }))}/>
                                 </div>
                                 <div className="col-sm-6">
                                     <label className="form-label wd-font-weight-bold" for="assignment-until">Until</label>
                                     <input id="assignment-until" className="form-control" type="date" value={assignment.availableUntilDate}
-                                    onChange={(e) => dispatch(selectAssignment({...assignment, availableUntilDate: e.target.value }))}/>
+                                    onChange={(e) => dispatch(setAssignment({...assignment, availableUntilDate: e.target.value }))}/>
                                 </div>
                             </div>
                         </div>

@@ -32,7 +32,7 @@ function Dashboard({ courses, course, setCourse, addNewCourse,
                 <button className="btn btn-danger wd-btn-dashboard-danger" onClick={addNewCourse} >
                     <FaPlus/> Add
                 </button>
-                <button className="btn btn-primary wd-btn-dashboard-primary" onClick={updateCourse} >
+                <button className="btn btn-primary wd-btn-dashboard-primary" onClick={() => updateCourse(course)} >
                     Update
                 </button>
             </div>
