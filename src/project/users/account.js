@@ -47,7 +47,7 @@ function Account() {
                 <input className="form-control mb-2" value={account.email}
                     onChange={(e) => setAccount({ ...account,
                     email: e.target.value })}/>
-                <select className="form-control mb-2" onChange={(e) => setAccount({ ...account,
+                <select className="form-control mb-2" value={account.role} onChange={(e) => setAccount({ ...account,
                     role: e.target.value })}>
                     <option value="USER">User</option>
                     <option value="ADMIN">Admin</option>
