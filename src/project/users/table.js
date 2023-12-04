@@ -54,17 +54,19 @@ function UserTable() {
                     </tr>
                     <tr>
                         <td>
-                            <input value={user.username} onChange={(e) => setUser({ ...user, username: e.target.value })}/>
-                            <input value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })}/>                   
+                            <div className="row">
+                            <input className="form-control w-50" value={user.username} onChange={(e) => setUser({ ...user, username: e.target.value })}/>
+                            <input className="form-control w-50" type="password" value={user.password} onChange={(e) => setUser({ ...user, password: e.target.value })}/>   
+                            </div>                
                         </td>
                         <td>
-                            <input value={user.firstName} onChange={(e) => setUser({ ...user, firstName: e.target.value })}/>
+                            <input className="form-control" value={user.firstName} onChange={(e) => setUser({ ...user, firstName: e.target.value })}/>
                         </td>
                         <td>
-                            <input value={user.lastName} onChange={(e) => setUser({ ...user, lastName: e.target.value })}/>
+                            <input className="form-control" value={user.lastName} onChange={(e) => setUser({ ...user, lastName: e.target.value })}/>
                         </td>
                         <td>
-                            <select value={user.role} onChange={(e) => setUser({ ...user, role: e.target.value })}>
+                            <select className="form-control" value={user.role} onChange={(e) => setUser({ ...user, role: e.target.value })}>
                                 <option value="USER">User</option>
                                 <option value="ADMIN">Admin</option>
                                 <option value="FACULTY">Faculty</option>
@@ -73,7 +75,7 @@ function UserTable() {
                         </td>
                         <td className="text-nowrap">
                             <BsFillCheckCircleFill onClick={updateUser} className="me-2 text-success fs-1 text" />
-                            <BsPlusCircleFill onClick={createUser} className="text-success fs-1 text" />
+                            <BsPlusCircleFill onClick={createUser} className="text-primary fs-1 text" />
                         </td>
                         </tr>
                 </thead>

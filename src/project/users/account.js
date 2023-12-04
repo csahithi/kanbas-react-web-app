@@ -32,30 +32,30 @@ function Account() {
             <h1>Account</h1>
             {account && (
             <div>
-                <input value={account.password}
+                <input className="form-control mb-2" type="password" value={account.password}
                     onChange={(e) => setAccount({ ...account,
                     password: e.target.value })}/>
-                <input value={account.firstName}
+                <input className="form-control mb-2" value={account.firstName}
                     onChange={(e) => setAccount({ ...account,
                     firstName: e.target.value })}/>
-                <input value={account.lastName}
+                <input className="form-control mb-2" value={account.lastName}
                     onChange={(e) => setAccount({ ...account,
                     lastName: e.target.value })}/>
-                <input value={account.dob}
+                <input className="form-control mb-2" value={account.dob}
                     onChange={(e) => setAccount({ ...account,
                     dob: e.target.value })}/>
-                <input value={account.email}
+                <input className="form-control mb-2" value={account.email}
                     onChange={(e) => setAccount({ ...account,
                     email: e.target.value })}/>
-                <select onChange={(e) => setAccount({ ...account,
+                <select className="form-control mb-2" onChange={(e) => setAccount({ ...account,
                     role: e.target.value })}>
                     <option value="USER">User</option>
                     <option value="ADMIN">Admin</option>
                     <option value="FACULTY">Faculty</option>
                     <option value="STUDENT">Student</option>
                 </select>
-                <button onClick={save}>Save</button>
-                <button onClick={signout}>Signout</button>
+                <button className="btn btn-primary w-100 mb-2" onClick={save}>Save</button>
+                <button className="btn btn-danger w-100 mb-2" onClick={signout}>Signout</button>
                 <Link to="/project/admin/users" className="btn btn-warning w-100">Users</Link>
             </div>
             )}

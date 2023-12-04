@@ -9,11 +9,11 @@ const signin = async () => {
     navigate("/project/account");
 };
 return (
-    <div>
+    <div className="w-25">
         <h1>Signin</h1>
-        <input value={credentials.username} onChange={(e) => setCredentials({...credentials, username: e.target.value})}/>
-        <input value={credentials.password} onChange={(e) => setCredentials({...credentials, password: e.target.value})}/>
-        <button onClick={signin}> Signin </button>
+        <input className="form-control mb-2" value={credentials.username} onChange={(e) => setCredentials({...credentials, username: e.target.value})}/>
+        <input className="form-control mb-3" type="password" value={credentials.password} onChange={(e) => setCredentials({...credentials, password: e.target.value})}/>
+        <button className="btn btn-primary w-100" onClick={signin}> Signin </button>
     </div>
 );
 }
